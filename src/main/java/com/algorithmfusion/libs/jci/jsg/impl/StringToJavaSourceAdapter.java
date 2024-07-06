@@ -7,6 +7,11 @@ import java.util.regex.Pattern;
 import com.algorithmfusion.libs.jci.jsg.api.JavaSource;
 import com.algorithmfusion.libs.jci.jsg.api.JavaSourceAdapter;
 
+/**
+ * Adapter that can adapt any given correctly written in java syntax String to the corresponding {@link JavaSource} abstraction. 
+ * 
+ * @author Hallo Khaznadar
+ */
 public class StringToJavaSourceAdapter extends JavaSourceAdapter<String> {
 
 	private static final Pattern classNamePattern = Pattern.compile("\\s*class\\s+(\\w+)\\s+((extends\\s+\\w+)|(implements\\s+\\w+( ,\\w+)*))?\\s*\\{");
@@ -22,6 +27,9 @@ public class StringToJavaSourceAdapter extends JavaSourceAdapter<String> {
 		this.sourceRoot = sourceRoot;
 	}
 	
+	/**
+	 * Adapt given sourceCode to {@link JavaSource}
+	 */
 	@Override
 	public JavaSource adapt(String sourceCode) {
 		String sourceCodeWithNoComments = sourceCode.replaceAll("(?:/\\*(?:[^*]|(?:\\*+[^*/]))*\\*+/)|(?://.*)","");

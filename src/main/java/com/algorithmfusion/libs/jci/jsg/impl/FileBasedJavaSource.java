@@ -7,6 +7,11 @@ import java.util.Optional;
 
 import com.algorithmfusion.libs.jci.jsg.api.JavaSource;
 
+/**
+ * A {@link File} based java source object that persist its content in a file.
+ * 
+ * @author Hallo Khaznadar
+ */
 public class FileBasedJavaSource extends StringBasedJavaSource implements JavaSource {
 
 	private Optional<String> sourceRoot;
@@ -16,16 +21,26 @@ public class FileBasedJavaSource extends StringBasedJavaSource implements JavaSo
 		this.sourceRoot = builder.sourceRoot;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String getSourceRoot() {
 		return sourceRoot.orElse(null);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public File file() {
 		return new File(getSourceRoot(), getFullSourceNameWithPackage());
 	}
 
+	/**
+	 * Write the content of the java source into a file on disk.
+	 */
+	@Override
 	public void persist() throws IOException {
 		File sourceFile = file();
 		sourceFile.getParentFile().mkdirs();

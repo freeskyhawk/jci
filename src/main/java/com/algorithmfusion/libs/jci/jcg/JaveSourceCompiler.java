@@ -15,6 +15,11 @@ import javax.tools.StandardJavaFileManager;
 import javax.tools.StandardLocation;
 import javax.tools.ToolProvider;
 
+/**
+ * A Singleton runtime compiler class using the {@link JavaSource} abstraction as an input.
+ * 
+ * @author Hallo Khaznadar
+ */
 public class JaveSourceCompiler {
 
 	private static final JaveSourceCompiler instance = new JaveSourceCompiler();
@@ -24,14 +29,37 @@ public class JaveSourceCompiler {
 		this.compiler = ToolProvider.getSystemJavaCompiler();
 	}
 	
+	/**
+	 * Gets the instance of this class.
+	 * 
+	 * @return
+	 */
 	public static JaveSourceCompiler getInstance() {
 		return instance;
 	}
 	
+	/**
+	 * Compiles the given {@link JavaSource} and produces the classes to the given classOutput location.
+	 * This method also fills the given diagnostics information produced during the compilation process.
+	 * 
+	 * @param javaSource
+	 * @param classOutput
+	 * @param diagnostics
+	 * @return
+	 */
 	public boolean compile(JavaSource javaSource, String classOutput, DiagnosticCollector<JavaFileObject> diagnostics) {
 		return compile(javaSource, new File(classOutput), diagnostics);
 	}
 	
+	/**
+	 * Compiles the given {@link JavaSource} and produces the classes to the given classOutput location.
+	 * This method also fills the given diagnostics information produced during the compilation process.
+	 * 
+	 * @param javaSource
+	 * @param classOutput
+	 * @param diagnostics
+	 * @return
+	 */
 	public boolean compile(JavaSource javaSource, File classOutput, DiagnosticCollector<JavaFileObject> diagnostics) {
 		StandardJavaFileManager javaFileManager = null;
 		try {
